@@ -1,0 +1,21 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --transition-duration: 0.5s;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+.page-enter-active,
+.page-leave-active {
+  transition: opacity var(--transition-duration) ease;
+}
+
+.page-enter-from,
+.page-leave-to {
+  opacity: 0;
+}

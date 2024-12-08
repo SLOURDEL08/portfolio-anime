@@ -1,0 +1,92 @@
+// src/assets/styles/_variables.scss
+// Couleurs
+$primary-color: #3B82F6;
+$secondary-color: #1E40AF;
+$text-color: #1F2937;
+$background-color: #F9FAFB;
+
+// Transitions
+$transition-duration: 0.5s;
+$transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+
+// Z-index
+$z-layers: (
+  modal: 50,
+  overlay: 40,
+  navigation: 30,
+  content: 1
+);
+
+// Breakpoints
+$breakpoints: (
+  sm: 640px,
+  md: 768px,
+  lg: 1024px,
+  xl: 1280px
+);
+
+// Spacing
+$spacing-unit: 8px;
+$spacing-scale: (
+  1: $spacing-unit,
+  2: $spacing-unit * 2,
+  3: $spacing-unit * 3,
+  4: $spacing-unit * 4,
+  5: $spacing-unit * 5
+);
+
+// src/assets/styles/_mixins.scss
+@mixin responsive($breakpoint) {
+  @media (min-width: map-get($breakpoints, $breakpoint)) {
+    @content;
+  }
+}
+
+@mixin transition($property: all) {
+  transition: $property $transition-duration $transition-timing;
+}
+
+// src/assets/styles/main.scss
+@use 'variables' as *;
+@use 'mixins' as *;
+
+// Styles globaux
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  color: $text-color;
+  background-color: $background-color;
+  overflow-x: hidden;
+}
+
+// Classes d'animations réutilisables
+.fade {
+  &-enter-active,
+  &-leave-active {
+    @include transition(opacity);
+  }
+
+  &-enter-from,
+  &-leave-to {
+    opacity: 0;
+  }
+}
+
+.slide {
+  &-enter-active,
+  &-leave-active {
+    @include transition(transform);
+  }
+
+  &-enter-from {
+    transform: translateX(30px);
+    opacity: 0;
+  }
+
+  &-leave-to {
+    transform: translateX(-30px);
+    opacity: 0;
+  }
+}
